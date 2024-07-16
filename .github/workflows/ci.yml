@@ -1,0 +1,120 @@
+name: 'application deployment'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: compile
+        run: echo Compile step!
+
+  deploy-dev-migrations:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://dev.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy dev migrations
+
+  deploy-dev:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://dev.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy dev
+
+  deploy-dev-e2e:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://dev.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy dev e2e
+
+  deploy-stage-migrations:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: stage
+      url: https://stage.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy stage migrations
+
+  deploy-stage:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: stage
+      url: https://stage.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy stage
+
+  deploy-stage-e2e:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: stage
+      url: https://stage.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy stage e2e
+
+  deploy-prod-migrations:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://prod.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy prod migrations
+
+  deploy-prod:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://prod.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy prod
+
+  deploy-prod-e2e:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://prod.sample.com
+    steps:
+      - name: compile
+        run: echo Deploy prod e2e
