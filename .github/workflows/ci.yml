@@ -35,9 +35,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-dev-migrations
     runs-on: ubuntu-latest
-    environment:
-      name: dev
-      url: https://dev.sample.com
     steps:
       - name: action
         run: echo Deploy dev
@@ -46,9 +43,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-dev
     runs-on: ubuntu-latest
-    environment:
-      name: dev
-      url: https://dev.sample.com
     steps:
       - name: action
         run: echo Deploy dev e2e
@@ -68,9 +62,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-stage-migrations
     runs-on: ubuntu-latest
-    environment:
-      name: stage
-      url: https://stage.sample.com
     steps:
       - name: action
         run: echo Deploy stage
@@ -79,9 +70,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-stage
     runs-on: ubuntu-latest
-    environment:
-      name: stage
-      url: https://stage.sample.com
     steps:
       - name: action
         run: echo Deploy stage e2e
@@ -101,9 +89,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-prod-migrations
     runs-on: ubuntu-latest
-    environment:
-      name: prod
-      url: https://prod.sample.com
     steps:
       - name: action
         run: echo Deploy prod
@@ -112,9 +97,6 @@ jobs:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-prod
     runs-on: ubuntu-latest
-    environment:
-      name: prod
-      url: https://prod.sample.com
     steps:
       - name: action
         run: echo Deploy prod e2e
