@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -21,7 +20,7 @@ jobs:
         run: echo Compile step!
 
   deploy-dev-migrations:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -32,7 +31,6 @@ jobs:
         run: echo Deploy dev migrations
 
   deploy-dev:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-dev-migrations
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +38,6 @@ jobs:
         run: echo Deploy dev
 
   deploy-dev-e2e:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-dev
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +45,6 @@ jobs:
         run: echo Deploy dev e2e
 
   deploy-stage-migrations:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-dev-e2e
     runs-on: ubuntu-latest
     environment:
@@ -59,7 +55,6 @@ jobs:
         run: echo Deploy stage migrations
 
   deploy-stage:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-stage-migrations
     runs-on: ubuntu-latest
     steps:
@@ -67,7 +62,6 @@ jobs:
         run: echo Deploy stage
 
   deploy-stage-e2e:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-stage
     runs-on: ubuntu-latest
     steps:
@@ -75,7 +69,6 @@ jobs:
         run: echo Deploy stage e2e
 
   deploy-prod-migrations:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-stage-e2e
     runs-on: ubuntu-latest
     environment:
@@ -86,7 +79,6 @@ jobs:
         run: echo Deploy prod migrations
 
   deploy-prod:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-prod-migrations
     runs-on: ubuntu-latest
     steps:
@@ -94,7 +86,6 @@ jobs:
         run: echo Deploy prod
 
   deploy-prod-e2e:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||  github.event_name == 'pull_request') && github.ref == 'refs/heads/main'
     needs: deploy-prod
     runs-on: ubuntu-latest
     steps:
